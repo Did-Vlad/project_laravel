@@ -62,10 +62,23 @@ class EmployeeController extends Controller
         ]
     ];
 
-    // Каталог співробітників
+    // ✅ Каталог співробітників (для Blade)
     public function index()
     {
-        return $this->employees;
+        $employees = [];
+
+        foreach ($this->employees as $id => $employee) {
+            $positionTitle = $this->positions[$employee["position_id"]]["title"] ?? "Невідомо";
+
+            $employees[] = [
+                "id" => $id,
+                "first_name" => $employee["first_name"],
+                "last_name" => $employee["last_name"],
+                "position" => $positionTitle
+            ];
+        }
+
+        return view('employees.index', compact('employees'));
     }
 
     // Вибір конкретного співробітника
@@ -77,8 +90,8 @@ class EmployeeController extends Controller
 
         $employee = $this->employees[$id];
 
-        // Додаємо інформацію про посаду
-        $employee["position"] = $this->positions[$employee["position_id"]] ?? "Посаду не знайдено";
+        $employee["position"] =
+            $this->positions[$employee["position_id"]]["title"] ?? "Посаду не знайдено";
 
         return $employee;
     }
