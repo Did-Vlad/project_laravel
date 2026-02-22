@@ -1,0 +1,7 @@
+<div class="card shadow mb-3">
+    <div class="card-body">
+        <h5 class="card-title">{{ $title }}</h5>
+        <p class="card-text text-muted">{{ $subtitle }}</p>
+        <a href="{{ $link }}" class="btn btn-primary btn-sm">Детальніше</a>
+    </div>
+</div>
