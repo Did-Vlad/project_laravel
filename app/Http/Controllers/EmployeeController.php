@@ -68,7 +68,7 @@ class EmployeeController extends Controller
         return $this->employees;
     }
 
-    // Конкретний співробітник
+    // Вибір конкретного співробітника
     public function show($id)
     {
         if (!isset($this->employees[$id])) {
