@@ -14,7 +14,6 @@ class ProjectController extends Controller
         return view('projects.index', compact('projects'));
     }
 
-    // форма створення
     public function create()
     {
         return view('projects.create');
