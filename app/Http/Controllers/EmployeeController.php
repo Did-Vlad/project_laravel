@@ -62,7 +62,7 @@ class EmployeeController extends Controller
         ]
     ];
 
-    // Каталог співробітників (для Blade)
+    // Каталог співробітників
     public function index()
     {
         $employees = [];
