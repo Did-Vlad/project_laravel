@@ -10,7 +10,7 @@
             <div class="col-md-4">
                 <x-card 
                     :title="$employee['first_name'] . ' ' . $employee['last_name']"
-                    :subtitle="$employee['position']"
+                    :subtitle="$employee->position->title ?? 'Невідомо'"
                     :link="'/employees/' . $employee['id']"
                 />
             </div>
