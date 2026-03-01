@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Training extends Model
 {
+
+    protected $table = 'training';
+
     protected $fillable = [
         'course_name',
         'description',
