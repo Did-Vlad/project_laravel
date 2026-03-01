@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Vacation extends Model
 {
+
+    protected $table = 'vacation';
+
     protected $fillable = [
         'employee_id',
         'type',
