@@ -9,7 +9,7 @@ class EmployeeController extends Controller
     // Каталог співробітників
     public function index()
     {
-        $employees = Employee::with('position')->get();
+        $employees = Employee::with('Position')->get();
 
         return view('employees.index', compact('employees'));
     }
@@ -17,7 +17,7 @@ class EmployeeController extends Controller
     // Один співробітник
     public function show($id)
     {
-        $employee = Employee::with('position')->find($id);
+        $employee = Employee::with('Position')->find($id);
 
         if (!$employee) {
             return "Співробітника не знайдено";
