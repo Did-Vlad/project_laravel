@@ -42,7 +42,7 @@
 </table>
 @endif
 
-<h2>Навчання</h2>
+<h4>Навчання</h4>
 @if($employee->trainings->isEmpty())
     <p>Немає навчань</p>
 @else
@@ -68,7 +68,7 @@
 </table>
 @endif
 
-<h2>Відпустка</h2>
+<h4>Відпустка</h4>
 @if($employee->vacations->isEmpty())
     <p>Немає відпусток</p>
 @else
@@ -92,7 +92,7 @@
 </table>
 @endif
 
-<h2>Проекти</h2>
+<h4>Проекти</h4>
 @if($employee->projectAssignments->isEmpty())
     <p>Немає призначень</p>
 @else
