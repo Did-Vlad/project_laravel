@@ -6,24 +6,23 @@ use App\Models\Employee;
 
 class EmployeeController extends Controller
 {
-    // Каталог співробітників
     public function index()
     {
-        $employees = Employee::with('Position')->get();
+        $employees = Employee::with('position')->get();
 
         return view('employees.index', compact('employees'));
     }
 
-    // Один співробітник
-  public function show($id)
- {
-    $employee = Employee::with([
-        'tasks',
-        'trainings',
-        'vacations',
-        'projectAssignments.position'
-    ])->findOrFail($id);
+    public function show($id)
+    {
+        $employee = Employee::with([
+            'position',
+            'tasks',
+            'trainings',
+            'vacations',
+            'projectAssignments.position'
+        ])->findOrFail($id);
 
-    return view('employees.show', compact('employee'));
- } 
+        return view('employees.show', compact('employee'));
+    }
 }
