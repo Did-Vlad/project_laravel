@@ -17,6 +17,7 @@ class EmployeeController extends Controller
     {
         $employee = Employee::with([
             'position',
+            'department',
             'tasks',
             'trainings',
             'vacations',

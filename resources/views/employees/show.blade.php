@@ -114,6 +114,9 @@
         @endforeach
     </tbody>
 </table>
+
+<p>Відділ: {{ $employee->department->name ?? '—' }}</p>
+
 @endif
 
 <a href="/employees">Назад</a>

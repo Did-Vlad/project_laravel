@@ -19,6 +19,7 @@ class Employee extends Model
         'termination_date',
         'status',
         'position_id',
+        'department_id',
     ];
 
     public function position()
