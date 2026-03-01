@@ -8,7 +8,7 @@
 <p>Email: {{ $employee->email }}</p>
 <p>Телефон: {{ $employee->phone }}</p>
 <p>Статус: {{ $employee->status }}</p>
-<p>Посада: {{ $employee->position->name }}</p>
+<p>Посада: {{ $employee->position->name ?? 'Невідомо' }}</p>
 
 <a href="/employees">Назад</a>
 @endsection
