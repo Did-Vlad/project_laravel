@@ -13,6 +13,7 @@
 <p>Дата звільнення: {{ $employee->termination_date ?? '—' }}</p>
 <p>Статус: {{ $employee->status }}</p>
 <p>Посада: {{ $employee->position->name ?? '—' }}</p>
+<p>Відділ: {{ $employee->department->name ?? '—' }}</p>
 
 <h4>Задачі</h4>
 @if($employee->tasks->isEmpty())
@@ -49,10 +50,10 @@
 <table border="1" cellpadding="6">
     <thead>
         <tr>
-            <th>Course</th>
-            <th>Description</th>
-            <th>Start</th>
-            <th>End</th>
+            <th>Курс</th>
+            <th>Опис</th>
+            <th>Початок</th>
+            <th>Кінець</th>
         </tr>
     </thead>
     <tbody>
@@ -75,9 +76,9 @@
 <table border="1" cellpadding="6">
     <thead>
         <tr>
-            <th>Type</th>
-            <th>Start</th>
-            <th>End</th>
+            <th>Тип</th>
+            <th>Початок</th>
+            <th>Кінець</th>
         </tr>
     </thead>
     <tbody>
@@ -99,9 +100,9 @@
 <table border="1" cellpadding="6">
     <thead>
         <tr>
-            <th>Position</th>
-            <th>Start</th>
-            <th>End</th>
+            <th>Посада</th>
+            <th>Початок</th>
+            <th>Кінець</th>
         </tr>
     </thead>
     <tbody>
@@ -114,9 +115,6 @@
         @endforeach
     </tbody>
 </table>
-
-<p>Відділ: {{ $employee->department->name ?? '—' }}</p>
-
 @endif
 
 <a href="/employees">Назад</a>
