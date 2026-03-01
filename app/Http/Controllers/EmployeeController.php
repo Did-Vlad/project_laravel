@@ -15,14 +15,14 @@ class EmployeeController extends Controller
     }
 
     // Один співробітник
-    public function show($id)
-    {
-        $employee = Employee::with('Position')->find($id);
+ public function show($id)
+{
+    $employee = Employee::with([
+        'tasks',
+        'trainings',
+        'vacations',
+        'projectAssignments.position'
+    ])->findOrFail($id);
 
-        if (!$employee) {
-            return "Співробітника не знайдено";
-        }
-
-        return view('employees.show', compact('employee'));
-    }
+    return view('employees.show', compact('employee'));
 }
