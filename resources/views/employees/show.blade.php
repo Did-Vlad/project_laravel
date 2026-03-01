@@ -3,7 +3,7 @@
 @section('title', 'Працівник')
 
 @section('content')
-<p>Ім'я:{{ $employee->first_name }}</p>
+<p>Ім'я: {{ $employee->first_name }}</p>
 <p>Призвіще: {{ $employee->last_name }}</p> 
 
 <p>По батькові: {{ $employee->midl_name }}</p>
