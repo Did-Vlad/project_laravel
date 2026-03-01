@@ -15,8 +15,8 @@ class EmployeeController extends Controller
     }
 
     // Один співробітник
- public function show($id)
-{
+  public function show($id)
+ {
     $employee = Employee::with([
         'tasks',
         'trainings',
@@ -25,5 +25,5 @@ class EmployeeController extends Controller
     ])->findOrFail($id);
 
     return view('employees.show', compact('employee'));
-}
+ } 
 }
