@@ -1,27 +1,28 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\Employee;
 
 class EmployeeController extends Controller
 {
     public function index()
     {
-        $employees = Employee::with('position', 'department')->get();
-        return view('admin.employees.index', compact('employees'));
+        $employees = Employee::with('position')->get();
+        return view('employees.index', compact('employees'));
     }
 
-    public function show(Employee $employee)
+    public function show($id)
     {
-        $employee->load(['position', 'department', 'tasks', 'trainings', 'vacations', 'projectAssignments.position']);
-        return view('admin.employees.show', compact('employee'));
-    }
+        $employee = Employee::with([
+            'position',
+            'department',
+            'tasks',
+            'trainings',
+            'vacations',
+            'projectAssignments.position'
+        ])->findOrFail($id);
 
-    public function destroy(Employee $employee)
-    {
-        $employee->delete();
-        return redirect()->route('admin.employees.index')->with('success', 'Працівника видалено');
+        return view('employees.show', compact('employee'));
     }
 }
