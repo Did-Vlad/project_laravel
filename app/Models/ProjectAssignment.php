@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ProjectAssignment extends Model
 {
-    protected $table  = 'project_assignment';
+    protected $table  = 'projectassignment';
     protected $fillable = [
         'employee_id',
         'position_id',
