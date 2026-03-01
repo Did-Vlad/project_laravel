@@ -3,7 +3,8 @@
 @section('title', 'Працівник')
 
 @section('content')
-<h1>{{ $employee->last_name }} {{ $employee->first_name }}</h1>
+<p>Ім'я:{{ $employee->first_name }}</p>
+<p>Призвіще: {{ $employee->last_name }}</p> 
 
 <p>По батькові: {{ $employee->midl_name }}</p>
 <p>Стать: {{ $employee->gender }}</p>
