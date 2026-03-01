@@ -14,8 +14,7 @@
 <p>Статус: {{ $employee->status }}</p>
 <p>Посада: {{ $employee->position->name ?? '—' }}</p>
 
-{{-- ЗАДАЧІ --}}
-<h3>Задачі</h3>
+<h2>Задачі</h2>
 @if($employee->tasks->isEmpty())
     <p>Немає задач</p>
 @else
@@ -43,7 +42,7 @@
 </table>
 @endif
 
-<h3>Навчання</h3>
+<h2>Навчання</h2>
 @if($employee->trainings->isEmpty())
     <p>Немає навчань</p>
 @else
@@ -69,7 +68,7 @@
 </table>
 @endif
 
-<h3>Vacation</h3>
+<h2>Відпустка</h2>
 @if($employee->vacations->isEmpty())
     <p>Немає відпусток</p>
 @else
@@ -93,7 +92,7 @@
 </table>
 @endif
 
-<h3>Проекти</h3>
+<h2>Проекти</h2>
 @if($employee->projectAssignments->isEmpty())
     <p>Немає призначень</p>
 @else
