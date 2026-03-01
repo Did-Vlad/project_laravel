@@ -46,4 +46,9 @@ class Employee extends Model
     {
         return $this->hasMany(ProjectAssignment::class, 'employee_id');
     }
+    
+    public function department()
+    {
+    return $this->belongsTo(Department::class, 'department_id');
+    }
 }
