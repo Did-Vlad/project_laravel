@@ -14,7 +14,7 @@
 <p>Статус: {{ $employee->status }}</p>
 <p>Посада: {{ $employee->position->name ?? '—' }}</p>
 
-<h1>Задачі</h1>
+<h4>Задачі</h4>
 @if($employee->tasks->isEmpty())
     <p>Немає задач</p>
 @else
