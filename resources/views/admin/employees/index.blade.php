@@ -1,43 +1,50 @@
 @extends('layouts.app')
 
-@section('title', 'Адмін — Деталі працівника')
+@section('title', 'Адмін — Працівники')
 
 @section('content')
 
-<h2>{{ $employee->first_name }} {{ $employee->last_name }} {{ $employee->midl_name }}</h2>
+<h2>Список працівників</h2>
 
-<p>Email: {{ $employee->email }}</p>
-<p>Телефон: {{ $employee->phone }}</p>
-<p>Стать: {{ $employee->gender }}</p>
-<p>Дата прийому: {{ $employee->hire_date }}</p>
-<p>Дата звільнення: {{ $employee->termination_date ?? '—' }}</p>
-<p>Статус: {{ $employee->status }}</p>
-<p>Посада: {{ $employee->position->name ?? '—' }}</p>
-<p>Відділ: {{ $employee->department->name ?? '—' }}</p>
+@if(session('success'))
+    <p style="color: green;">{{ session('success') }}</p>
+@endif
 
-<h4>Задачі</h4>
-@if($employee->tasks->isEmpty())
-    <p>Немає задач</p>
-@else
 <table border="1" cellpadding="6">
     <thead>
-        <tr><th>Назва</th><th>Опис</th><th>Початок</th><th>Кінець</th><th>Статус</th></tr>
+        <tr>
+            <th>ID</th>
+            <th>Ім'я</th>
+            <th>Прізвище</th>
+            <th>Email</th>
+            <th>Посада</th>
+            <th>Відділ</th>
+            <th>Статус</th>
+            <th>Дії</th>
+        </tr>
     </thead>
     <tbody>
-        @foreach($employee->tasks as $task)
+        @foreach($employees as $employee)
         <tr>
-            <td>{{ $task->name }}</td>
-            <td>{{ $task->description }}</td>
-            <td>{{ $task->start_date }}</td>
-            <td>{{ $task->end_date ?? '—' }}</td>
-            <td>{{ $task->status }}</td>
+            <td>{{ $employee->id }}</td>
+            <td>{{ $employee->first_name }}</td>
+            <td>{{ $employee->last_name }}</td>
+            <td>{{ $employee->email }}</td>
+            <td>{{ $employee->position->name ?? '—' }}</td>
+            <td>{{ $employee->department->name ?? '—' }}</td>
+            <td>{{ $employee->status }}</td>
+            <td>
+                <a href="{{ route('admin.employees.show', $employee) }}">Переглянути</a>
+
+                <form action="{{ route('admin.employees.destroy', $employee) }}" method="POST" style="display:inline;">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" onclick="return confirm('Видалити працівника?')">Видалити</button>
+                </form>
+            </td>
         </tr>
         @endforeach
     </tbody>
 </table>
-@endif
-
-<br>
-<a href="{{ route('admin.employees.index') }}">← Назад до списку</a>
 
 @endsection
