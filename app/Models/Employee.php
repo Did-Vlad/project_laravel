@@ -8,6 +8,8 @@ class Employee extends Model
 {
     protected $table = 'employee';
 
+    public $timestamps = false;
+
     protected $fillable = [
         'first_name',
         'last_name',
