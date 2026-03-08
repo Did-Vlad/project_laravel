@@ -24,7 +24,7 @@ Route::get('/projects/{id}', [ProjectController::class, 'show']);
 // Адмін маршрути
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('employees', \App\Http\Controllers\Admin\EmployeeController::class)
-        ->only(['index', 'show', 'destroy']);
+        ->only(['index', 'show', 'destroy', 'create', 'store']);
 
     Route::resource('projects', \App\Http\Controllers\Admin\ProjectController::class)
         ->only(['index']);
