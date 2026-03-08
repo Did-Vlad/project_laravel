@@ -5,7 +5,7 @@
 @section('content')
 
 <h2>Список працівників</h2>
-
+<a href="{{ route ('admin.employees.create')}}">Додати нового працівника</a>
 @if(session('success'))
     <p style="color: green;">{{ session('success') }}</p>
 @endif
