@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 
 class ProjectController extends Controller
 {
-    // список
     public function index()
     {
         $projects = Project::all();
@@ -19,15 +18,21 @@ class ProjectController extends Controller
         return view('projects.create');
     }
 
-    // збереження
     public function store(Request $request)
     {
+        $request->validate([
+            'name'        => 'required|string|max:100',
+            'description' => 'nullable|string',
+            'cost'        => 'required|numeric|min:0',
+            'start_date'  => 'required|date',
+            'end_date'    => 'nullable|date|after:start_date',
+        ]);
+
         Project::create($request->all());
 
-        return redirect('/projects');
+        return redirect('/projects')->with('success', 'Проект успішно додано!');
     }
 
-    // один проект
     public function show($id)
     {
         $project = Project::with('tasks')->findOrFail($id);
