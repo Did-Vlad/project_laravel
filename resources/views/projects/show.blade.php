@@ -7,7 +7,7 @@
 <h2>{{$project->name}}</h2>
 
 <p>Опис: {{ $project->description}}</p>
-<p>Бюджет: {{ $project->cost}}</p>
+<p>Бюджет: {{ $project->budget}}</p>
 <p>Дата початку: {{ $project->start_date}}</p>
 <p>Дата кінця: {{ $project->end_date ?? '-'}}</p>
 

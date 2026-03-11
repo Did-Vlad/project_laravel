@@ -15,7 +15,7 @@ class Project extends Model
         'description',
         'start_date',
         'end_date',
-        'cost',
+        'budget',
     ];
 
     public function tasks()
