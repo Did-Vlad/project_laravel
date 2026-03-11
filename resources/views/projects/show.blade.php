@@ -12,7 +12,7 @@
 <p>Дата кінця: {{ $project->end_date ?? '-'}}</p>
 
 <h4>Задачі</h4>
-@if($project->tast->isEmpty())
+@if($project->tasks->isEmpty())
   <p>Немає задачі</p>
 @else
 <table border="1" cellpadding="6">
