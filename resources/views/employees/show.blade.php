@@ -1,26 +1,25 @@
 @extends('layouts.app')
 
-@section('title', 'Працівник')
+@section('title', $project->name)
 
 @section('content')
 
-<h2>{{ $employee->first_name }} {{ $employee->last_name }} {{ $employee->midl_name }}</h2>
-
-<p>Стать: {{ $employee->gender }}</p>
-<p>Email: {{ $employee->email }}</p>
-<p>Телефон: {{ $employee->phone }}</p>
-<p>Дата прийому: {{ $employee->hire_date }}</p>
-<p>Дата звільнення: {{ $employee->termination_date ?? '—' }}</p>
-<p>Статус: {{ $employee->status }}</p>
-<p>Посада: {{ $employee->position->name ?? '—' }}</p>
-<p>Відділ: {{ $employee->department->name ?? '—' }}</p>
+<div class="card mb-4">
+    <div class="card-body">
+        <h2 class="card-title fw-bold">{{ $project->name }}</h2>
+        <p class="card-text text-muted">{{ $project->description }}</p>
+        <p><strong>Бюджет:</strong> {{ $project->budget }}</p>
+        <p><strong>Дата початку:</strong> {{ $project->start_date }}</p>
+        <p><strong>Дата кінця:</strong> {{ $project->end_date ?? '—' }}</p>
+    </div>
+</div>
 
 <h4>Задачі</h4>
-@if($employee->tasks->isEmpty())
+@if($project->tasks->isEmpty())
     <p>Немає задач</p>
 @else
-<table border="1" cellpadding="6">
-    <thead>
+<table class="table table-bordered table-striped">
+    <thead class="table-dark">
         <tr>
             <th>Назва</th>
             <th>Опис</th>
@@ -30,7 +29,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach($employee->tasks as $task)
+        @foreach($project->tasks as $task)
         <tr>
             <td>{{ $task->name }}</td>
             <td>{{ $task->description }}</td>
@@ -43,80 +42,6 @@
 </table>
 @endif
 
-<h4>Навчання</h4>
-@if($employee->trainings->isEmpty())
-    <p>Немає навчань</p>
-@else
-<table border="1" cellpadding="6">
-    <thead>
-        <tr>
-            <th>Курс</th>
-            <th>Опис</th>
-            <th>Початок</th>
-            <th>Кінець</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach($employee->trainings as $training)
-        <tr>
-            <td>{{ $training->course_name }}</td>
-            <td>{{ $training->description }}</td>
-            <td>{{ $training->start_date }}</td>
-            <td>{{ $training->end_date ?? '—' }}</td>
-        </tr>
-        @endforeach
-    </tbody>
-</table>
-@endif
-
-<h4>Відпустка</h4>
-@if($employee->vacations->isEmpty())
-    <p>Немає відпусток</p>
-@else
-<table border="1" cellpadding="6">
-    <thead>
-        <tr>
-            <th>Тип</th>
-            <th>Початок</th>
-            <th>Кінець</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach($employee->vacations as $vacation)
-        <tr>
-            <td>{{ $vacation->type }}</td>
-            <td>{{ $vacation->start_date }}</td>
-            <td>{{ $vacation->end_date ?? '—' }}</td>
-        </tr>
-        @endforeach
-    </tbody>
-</table>
-@endif
-
-<h4>Проекти</h4>
-@if($employee->projectAssignments->isEmpty())
-    <p>Немає призначень</p>
-@else
-<table border="1" cellpadding="6">
-    <thead>
-        <tr>
-            <th>Посада</th>
-            <th>Початок</th>
-            <th>Кінець</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach($employee->projectAssignments as $assignment)
-        <tr>
-            <td>{{ $assignment->position->name ?? '—' }}</td>
-            <td>{{ $assignment->start_date }}</td>
-            <td>{{ $assignment->end_date ?? '—' }}</td>
-        </tr>
-        @endforeach
-    </tbody>
-</table>
-@endif
-
-<a href="/employees">Назад</a>
+<a href="/projects" class="btn btn-secondary mt-3">← Назад до списку</a>
 
 @endsection
