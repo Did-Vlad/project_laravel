@@ -16,7 +16,7 @@ Route::post('/projects', [ProjectController::class, 'store']);
 Route::get('/projects/{id}', [ProjectController::class, 'show']);
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return redirect('/employees');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
