@@ -4,14 +4,17 @@
 
 @section('content')
 
-<h2>Список працівників</h2>
-<a href="{{ route ('admin.employees.create')}}">Додати нового працівника</a>
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Список працівників</h2>
+    <a href="{{ route('admin.employees.create') }}" class="btn btn-success">Додати нового працівника</a>
+</div>
+
 @if(session('success'))
-    <p style="color: green;">{{ session('success') }}</p>
+    <div class="alert alert-success">{{ session('success') }}</div>
 @endif
 
-<table border="1" cellpadding="6">
-    <thead>
+<table class="table table-bordered table-striped">
+    <thead class="table-dark">
         <tr>
             <th>ID</th>
             <th>Ім'я</th>
@@ -34,12 +37,12 @@
             <td>{{ $employee->department->name ?? '—' }}</td>
             <td>{{ $employee->status }}</td>
             <td>
-                <a href="{{ route('admin.employees.show', $employee) }}">Переглянути</a>
+                <a href="{{ route('admin.employees.show', $employee) }}" class="btn btn-sm btn-primary">Переглянути</a>
 
                 <form action="{{ route('admin.employees.destroy', $employee) }}" method="POST" style="display:inline;">
                     @csrf
                     @method('DELETE')
-                    <button type="submit" onclick="return confirm('Видалити працівника?')">Видалити</button>
+                    <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Видалити працівника?')">Видалити</button>
                 </form>
             </td>
         </tr>
