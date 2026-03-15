@@ -16,7 +16,7 @@
 
 <h4>Задачі</h4>
 @if($project->tasks->isEmpty())
-    <p>Немає задач</p>
+    <div class="alert alert-warning d-inline-block">Немає задач</div>
 @else
 <table class="table table-bordered table-striped">
     <thead class="table-dark">
