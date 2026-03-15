@@ -4,24 +4,34 @@
 
 @section('content')
 
-<h2>{{ $employee->first_name }} {{ $employee->last_name }} {{ $employee->midl_name }}</h2>
-
-<p>Email: {{ $employee->email }}</p>
-<p>Телефон: {{ $employee->phone }}</p>
-<p>Стать: {{ $employee->gender }}</p>
-<p>Дата прийому: {{ $employee->hire_date }}</p>
-<p>Дата звільнення: {{ $employee->termination_date ?? '—' }}</p>
-<p>Статус: {{ $employee->status }}</p>
-<p>Посада: {{ $employee->position->name ?? '—' }}</p>
-<p>Відділ: {{ $employee->department->name ?? '—' }}</p>
+<div class="card mb-4">
+    <div class="card-body">
+        <h2 class="card-title fw-bold">{{ $employee->first_name }} {{ $employee->last_name }} {{ $employee->midl_name }}</h2>
+        <hr>
+        <p><strong>Email:</strong> {{ $employee->email }}</p>
+        <p><strong>Телефон:</strong> {{ $employee->phone }}</p>
+        <p><strong>Стать:</strong> {{ $employee->gender }}</p>
+        <p><strong>Дата прийому:</strong> {{ $employee->hire_date }}</p>
+        <p><strong>Дата звільнення:</strong> {{ $employee->termination_date ?? '—' }}</p>
+        <p><strong>Статус:</strong> {{ $employee->status }}</p>
+        <p><strong>Посада:</strong> {{ $employee->position->name ?? '—' }}</p>
+        <p><strong>Відділ:</strong> {{ $employee->department->name ?? '—' }}</p>
+    </div>
+</div>
 
 <h4>Задачі</h4>
 @if($employee->tasks->isEmpty())
     <p>Немає задач</p>
 @else
-<table border="1" cellpadding="6">
-    <thead>
-        <tr><th>Назва</th><th>Опис</th><th>Початок</th><th>Кінець</th><th>Статус</th></tr>
+<table class="table table-bordered table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>Назва</th>
+            <th>Опис</th>
+            <th>Початок</th>
+            <th>Кінець</th>
+            <th>Статус</th>
+        </tr>
     </thead>
     <tbody>
         @foreach($employee->tasks as $task)
@@ -37,7 +47,6 @@
 </table>
 @endif
 
-<br>
-<a href="{{ route('admin.employees.index') }}">← Назад до списку</a>
+<a href="{{ route('admin.employees.index') }}" class="btn btn-secondary mt-3">← Назад до списку</a>
 
 @endsection
