@@ -11,24 +11,21 @@
 
 <nav>
     <a href="/">EMS</a>
+    <a href="/employees">Співробітники</a>
+    <a href="/projects">Проєкти</a>
 
-    <div>
-        <a href="/employees">Співробітники</a>
-        <a href="/projects">Проєкти</a>
+    @auth
+        <span>{{ auth()->user()->name }}</span>
+        <form action="{{ route('logout') }}" method="POST" style="display:inline;">
+            @csrf
+            <button type="submit">Вихід</button>
+        </form>
+    @endauth
 
-        @auth
-            <span>{{ auth()->user()->name }}</span>
-            <form action="{{ route('logout') }}" method="POST" style="display:inline;">
-                @csrf
-                <button type="submit">Вихід</button>
-            </form>
-        @endauth
-
-        @guest
-            <a href="{{ route('login') }}">Увійти</a>
-            <a href="{{ route('register') }}">Реєстрація</a>
-        @endguest
-    </div>
+    @guest
+        <a href="{{ route('login') }}">Увійти</a>
+        <a href="{{ route('register') }}">Реєстрація</a>
+    @endguest
 </nav>
 
 <main>
