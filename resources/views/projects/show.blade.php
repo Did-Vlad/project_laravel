@@ -1,28 +1,31 @@
 @extends('layouts.app')
 
-@section('titel', $project->name)
+@section('title', $project->name)
 
 @section('content')
 
-<h2>{{$project->name}}</h2>
-
-<p>Опис: {{ $project->description}}</p>
-<p>Бюджет: {{ $project->budget}}</p>
-<p>Дата початку: {{ $project->start_date}}</p>
-<p>Дата кінця: {{ $project->end_date ?? '-'}}</p>
+<div class="card mb-4">
+    <div class="card-body">
+        <h2 class="card-title fw-bold">{{ $project->name }}</h2>
+        <p class="card-text text-muted">{{ $project->description }}</p>
+        <p><strong>Бюджет:</strong> {{ $project->budget }}</p>
+        <p><strong>Дата початку:</strong> {{ $project->start_date }}</p>
+        <p><strong>Дата кінця:</strong> {{ $project->end_date ?? '—' }}</p>
+    </div>
+</div>
 
 <h4>Задачі</h4>
 @if($project->tasks->isEmpty())
-  <p>Немає задачі</p>
+    <p>Немає задач</p>
 @else
-<table border="1" cellpadding="6">
-    <thead>
+<table class="table table-bordered table-striped">
+    <thead class="table-dark">
         <tr>
-          <th>Назва</th>
-          <th>Опис</th>
-          <th>Початок</th>
-          <th>Кінець</th>
-          <th>Статус</th>   
+            <th>Назва</th>
+            <th>Опис</th>
+            <th>Початок</th>
+            <th>Кінець</th>
+            <th>Статус</th>
         </tr>
     </thead>
     <tbody>
@@ -31,7 +34,7 @@
             <td>{{ $task->name }}</td>
             <td>{{ $task->description }}</td>
             <td>{{ $task->start_date }}</td>
-            <td>{{ $task->end_date }}</td>
+            <td>{{ $task->end_date ?? '—' }}</td>
             <td>{{ $task->status }}</td>
         </tr>
         @endforeach
@@ -39,7 +42,6 @@
 </table>
 @endif
 
-<br>
-<a href="/projects">Назад до списку</a>
+<a href="/projects" class="btn btn-secondary mt-3">← Назад до списку</a>
 
 @endsection
