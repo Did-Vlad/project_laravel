@@ -42,8 +42,6 @@
 </table>
 @endif
 
-@if($project->tasks->isEmpty())
-    <div class="alert alert-warning d-inline-block">Немає задач</div>
-@else
+<a href="/projects" class="btn btn-secondary mt-3">← Назад до списку</a>
 
 @endsection
