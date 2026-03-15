@@ -6,7 +6,7 @@ use App\Http\Controllers\MainController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ProjectController;
 
-Route::get('/', [MainController::class, 'index']);
+Route::get('/', function () {return redirect('/login');});
 Route::get('/about', [MainController::class, 'about']);
 Route::get('/employees', [EmployeeController::class, 'index']);
 Route::get('/employees/{id}', [EmployeeController::class, 'show']);
