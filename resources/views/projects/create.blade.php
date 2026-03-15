@@ -4,55 +4,54 @@
 
 @section('content')
 
-<h2>Додати новий проект</h2>
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <h2 class="mb-4">Додати новий проект</h2>
 
-@if(session('success'))
-    <p style="color: green;">{{ session('success') }}</p>
-@endif
+        @if(session('success'))
+            <div class="alert alert-success">{{ session('success') }}</div>
+        @endif
 
-<form action="/projects" method="POST">
-    @csrf
-<p>
-    <div>
-        <label>Назва</label>
-        <input type="text" name="name" value="{{ old('name') }}">
-        @error('name') <span style="color:red;">{{ $message }}</span> @enderror
-    </div>
-</p>
+        <form action="/projects" method="POST">
+            @csrf
 
-<p>
-    <div>
-        <label>Опис</label>
-        <textarea name="description">{{ old('description') }}</textarea>
-        @error('description') <span style="color:red;">{{ $message }}</span> @enderror
+            <div class="mb-3">
+                <label class="form-label">Назва</label>
+                <input type="text" name="name" class="form-control" value="{{ old('name') }}">
+                @error('name') <span class="text-danger">{{ $message }}</span> @enderror
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Опис</label>
+                <textarea name="description" class="form-control" rows="3">{{ old('description') }}</textarea>
+                @error('description') <span class="text-danger">{{ $message }}</span> @enderror
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Бюджет</label>
+                <input type="number" name="cost" class="form-control" value="{{ old('cost') }}" step="0.01">
+                @error('cost') <span class="text-danger">{{ $message }}</span> @enderror
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Дата початку</label>
+                <input type="date" name="start_date" class="form-control" value="{{ old('start_date') }}">
+                @error('start_date') <span class="text-danger">{{ $message }}</span> @enderror
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Дата кінця</label>
+                <input type="date" name="end_date" class="form-control" value="{{ old('end_date') }}">
+                @error('end_date') <span class="text-danger">{{ $message }}</span> @enderror
+            </div>
+
+            <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-success">Підтвердити</button>
+                <a href="/projects" class="btn btn-secondary">Скасувати</a>
+            </div>
+
+        </form>
     </div>
-</p>
-<p>
-    <div>
-        <label>Бюджет</label>
-        <input type="number" name="cost" value="{{ old('cost') }}" step="0.01">
-        @error('cost') <span style="color:red;">{{ $message }}</span> @enderror
-    </div>
-</p>
-<p>
-    <div>
-        <label>Дата початку</label>
-        <input type="date" name="start_date" value="{{ old('start_date') }}">
-        @error('start_date') <span style="color:red;">{{ $message }}</span> @enderror
-    </div>
-</p>
-<p>
-    <div>
-        <label>Дата кінця</label>
-        <input type="date" name="end_date" value="{{ old('end_date') }}">
-        @error('end_date') <span style="color:red;">{{ $message }}</span> @enderror
-    </div>
-</p>
-<p>
-    <br>
-    <button type="submit">Підтвердити</button>
-    <a href="/projects">Скасувати</a>
-</p>
-</form>
+</div>
 
 @endsection
