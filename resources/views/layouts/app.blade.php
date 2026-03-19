@@ -10,42 +10,24 @@
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4">
+<nav class="navbar navbar-dark bg-dark px-4">
     <a class="navbar-brand fw-bold" href="/">EMS</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav me-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="/employees">Співробітники</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/projects">Проєкти</a>
-            </li>
-        </ul>
-        <ul class="navbar-nav ms-auto align-items-center">
-            @auth
-                <li class="nav-item">
-                    <span class="nav-link text-white">{{ auth()->user()->name }}</span>
-                </li>
-                <li class="nav-item">
-                    <form action="{{ route('logout') }}" method="POST">
-                        @csrf
-                        <button type="submit" class="btn btn-outline-light btn-sm">Вихід</button>
-                    </form>
-                </li>
-            @endauth
+    <div class="d-flex align-items-center gap-3">
+        <a class="nav-link text-white" href="/employees">Співробітники</a>
+        <a class="nav-link text-white" href="/projects">Проєкти</a>
 
-            @guest
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('login') }}">Увійти</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('register') }}">Реєстрація</a>
-                </li>
-            @endguest
-        </ul>
+        @auth
+            <span class="text-white">{{ auth()->user()->name }}</span>
+            <form action="{{ route('logout') }}" method="POST">
+                @csrf
+                <button type="submit" class="btn btn-outline-light btn-sm">Вихід</button>
+            </form>
+        @endauth
+
+        @guest
+            <a class="btn btn-outline-light btn-sm" href="{{ route('login') }}">Увійти</a>
+            <a class="btn btn-outline-light btn-sm" href="{{ route('register') }}">Реєстрація</a>
+        @endguest
     </div>
 </nav>
 
