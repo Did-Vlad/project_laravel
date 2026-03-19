@@ -22,7 +22,7 @@
             </li>
         </ul>
         <ul class="navbar-nav ms-auto">
-            @auth
+        @auth
                 <li class="nav-item">
                     <span class="nav-link text-white">{{ auth()->user()->name }}</span>
                 </li>
