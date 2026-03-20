@@ -20,7 +20,7 @@ class EmployeeController extends Controller
     {
         $employee = Employee::with('position')->find($id);
     
-        if ($employee) {
+        if (!$employee) {
             return response()->json(['message' => 'Employee not found'], 404);
         }
     
