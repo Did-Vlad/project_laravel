@@ -15,7 +15,12 @@ class EmployeeController extends Controller
        return EmployeeResource::collection($employees);
     }
 
-   
+    public function store(Request $request)
+    {
+        $employee = Employee::create($request->all());
+        return new EmployeeResource($employee);
+    }
+
     public function show($id)
     {
         $employee = Employee::with('position')->find($id);
