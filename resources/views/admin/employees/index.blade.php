@@ -4,9 +4,9 @@
 
 @section('content')
 
-<div class="d-flex justify-content-between align-items-center mb-3">
-    <h2>Список працівників</h2>
-    <a href="{{ route('admin.employees.create') }}" class="btn btn-success">Додати нового працівника</a>
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="fw-bold">Список працівників</h2>
+    <a href="{{ route('admin.employees.create') }}" class="btn btn-success px-4"> Додати працівника</a>
 </div>
 
 @if(session('success'))
