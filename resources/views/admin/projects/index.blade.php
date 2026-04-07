@@ -1,10 +1,13 @@
 @extends('layouts.app')
 
-@section('title', 'Адмін — Проекти')
+@section('title', 'Адмін - Проекти')
 
 @section('content')
 
-<h2>Список проектів</h2>
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Список проектів</h2>
+    <a href="{{ route('admin.projects.create') }}" class="btn btn-success">Додати новий проект</a>
+</div>
 
 <table class="table table-bordered table-striped mt-3">
     <thead class="table-dark">
