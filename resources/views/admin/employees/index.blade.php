@@ -15,6 +15,7 @@
 
 <table class="table table-bordered table-striped">
     <thead class="table-dark">
+        
         <tr>
             <th>ID</th>
             <th>Ім'я</th>
@@ -25,6 +26,7 @@
             <th>Статус</th>
             <th>Дії</th>
         </tr>
+
     </thead>
     <tbody>
         @foreach($employees as $employee)
