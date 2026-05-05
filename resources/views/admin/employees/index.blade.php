@@ -1,12 +1,11 @@
 @extends('layouts.app')
-
 @section('title', 'Адмін — Працівники')
-
 @section('content')
-
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h2 class="fw-bold">Список працівників</h2>
-    <a href="{{ route('admin.employees.create') }}" class="btn btn-success px-4"> Додати працівника</a>
+    @if(auth()->user()->role === 'admin')
+        <a href="{{ route('admin.employees.create') }}" class="btn btn-success px-4">+ Додати працівника</a>
+    @endif
 </div>
 
 @if(session('success'))
@@ -15,7 +14,6 @@
 
 <table class="table table-bordered table-striped">
     <thead class="table-dark">
-        
         <tr>
             <th>ID</th>
             <th>Ім'я</th>
@@ -26,7 +24,6 @@
             <th>Статус</th>
             <th>Дії</th>
         </tr>
-
     </thead>
     <tbody>
         @foreach($employees as $employee)
@@ -41,15 +38,18 @@
             <td>
                 <a href="{{ route('admin.employees.show', $employee) }}" class="btn btn-sm btn-primary">Переглянути</a>
 
-                <form action="{{ route('admin.employees.destroy', $employee) }}" method="POST" style="display:inline;">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Видалити працівника?')">Видалити</button>
-                </form>
+                @if(auth()->user()->role === 'admin')
+                    <a href="{{ route('admin.employees.edit', $employee) }}" class="btn btn-sm btn-warning">Редагувати</a>
+
+                    <form action="{{ route('admin.employees.destroy', $employee) }}" method="POST" style="display:inline;">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Видалити працівника?')">Видалити</button>
+                    </form>
+                @endif
             </td>
         </tr>
         @endforeach
     </tbody>
 </table>
-
 @endsection

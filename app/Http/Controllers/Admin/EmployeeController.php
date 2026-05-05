@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Http\Controllers\Admin;
-
 use App\Http\Controllers\Controller;
 use App\Models\Employee;
 use App\Models\Position;
@@ -31,16 +29,14 @@ class EmployeeController extends Controller
             'midl_name'        => 'nullable|string|max:30',
             'gender'           => 'required|in:M,F',
             'phone'            => 'required|regex:/^\+?[0-9]{10,15}$/',
-            'email'            => 'required|email|unique:employee,email',
+            'email'            => 'required|email|unique:employees,email',
             'hire_date'        => 'required|date',
             'termination_date' => 'nullable|date|after:hire_date',
             'status'           => 'required|in:Активний,Звільнений',
-            'position_id'      => 'required|exists:position,id',
-            'department_id'    => 'required|exists:department,id',
+            'position_id'      => 'required|exists:positions,id',
+            'department_id'    => 'required|exists:departments,id',
         ]);
-
         Employee::create($request->all());
-
         return redirect()->route('admin.employees.index')
             ->with('success', 'Працівника успішно додано!');
     }
@@ -51,9 +47,37 @@ class EmployeeController extends Controller
         return view('admin.employees.show', compact('employee'));
     }
 
+    public function edit(Employee $employee)
+    {
+        $positions = Position::all();
+        $departments = Department::all();
+        return view('admin.employees.edit', compact('employee', 'positions', 'departments'));
+    }
+
+    public function update(Request $request, Employee $employee)
+    {
+        $request->validate([
+            'first_name'       => 'required|string|max:30',
+            'last_name'        => 'required|string|max:30',
+            'midl_name'        => 'nullable|string|max:30',
+            'gender'           => 'required|in:M,F',
+            'phone'            => 'required|regex:/^\+?[0-9]{10,15}$/',
+            'email'            => 'required|email|unique:employees,email,' . $employee->id,
+            'hire_date'        => 'required|date',
+            'termination_date' => 'nullable|date|after:hire_date',
+            'status'           => 'required|in:Активний,Звільнений',
+            'position_id'      => 'required|exists:positions,id',
+            'department_id'    => 'required|exists:departments,id',
+        ]);
+        $employee->update($request->all());
+        return redirect()->route('admin.employees.index')
+            ->with('success', 'Працівника успішно оновлено!');
+    }
+
     public function destroy(Employee $employee)
     {
         $employee->delete();
-        return redirect()->route('admin.employees.index')->with('success', 'Працівника видалено');
+        return redirect()->route('admin.employees.index')
+            ->with('success', 'Працівника видалено!');
     }
 }
