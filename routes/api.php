@@ -1,19 +1,16 @@
 <?php
-
 use App\Http\Controllers\Api\EmployeeController;
+use App\Http\Controllers\Api\DepartmentController;
 use Illuminate\Support\Facades\Route;
 
-// 1. Роути, доступні всім авторизованим User та Admin
-Route::middleware('auth:sanctum')->group(function () {
-    
-    // Тільки перегляд списку та одного працівника
-    Route::get('employees', [EmployeeController::class, 'index']);
-    Route::get('employees/{employee}', [EmployeeController::class, 'show']);
+// Публічні GET роути
+Route::get('employees', [EmployeeController::class, 'index']);
+Route::get('employees/{id}', [EmployeeController::class, 'show']);
+Route::get('departments', [DepartmentController::class, 'index']);
 
-    // 2. Адмін роути
-Route::middleware('admin')->group(function () {
-Route::post('employees', [EmployeeController::class, 'store']);
-Route::put('employees/{employee}', [EmployeeController::class, 'update']);
-Route::delete('employees/{employee}', [EmployeeController::class, 'destroy']);
-    });
+// Адмін роути з авторизацією
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('employees', [EmployeeController::class, 'store']);
+    Route::put('employees/{id}', [EmployeeController::class, 'update']);
+    Route::delete('employees/{id}', [EmployeeController::class, 'destroy']);
 });

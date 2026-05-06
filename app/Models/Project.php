@@ -17,9 +17,4 @@ class Project extends Model
         'end_date',
         'budget',
     ];
-
-    public function tasks()
-    {
-        return $this->hasMany(Task::class, 'project_id');
-    }
 }

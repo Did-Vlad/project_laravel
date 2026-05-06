@@ -1,47 +1,37 @@
 @extends('layouts.app')
-
 @section('title', $project->name)
-
 @section('content')
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="fw-bold">{{ $project->name }}</h2>
+        <a href="{{ url('/projects') }}" class="btn btn-secondary">← Назад</a>
+    </div>
 
-<div class="card mb-4">
-    <div class="card-body">
-        <h2 class="card-title fw-bold">{{ $project->name }}</h2>
-        <p class="card-text text-muted">{{ $project->description }}</p>
-        <p><strong>Бюджет:</strong> {{ $project->budget }}</p>
-        <p><strong>Дата початку:</strong> {{ $project->start_date }}</p>
-        <p><strong>Дата кінця:</strong> {{ $project->end_date ?? '—' }}</p>
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <table class="table table-bordered">
+                <tr>
+                    <th>Назва</th>
+                    <td>{{ $project->name }}</td>
+                </tr>
+                <tr>
+                    <th>Опис</th>
+                    <td>{{ $project->description ?? '—' }}</td>
+                </tr>
+                <tr>
+                    <th>Бюджет</th>
+                    <td>{{ number_format($project->budget, 2) }} грн</td>
+                </tr>
+                <tr>
+                    <th>Дата початку</th>
+                    <td>{{ $project->start_date ?? '—' }}</td>
+                </tr>
+                <tr>
+                    <th>Дата завершення</th>
+                    <td>{{ $project->end_date ?? '—' }}</td>
+                </tr>
+            </table>
+        </div>
     </div>
 </div>
-
-<h4>Задачі</h4>
-@if($project->tasks->isEmpty())
-    <p>Немає задач</p>
-@else
-<table class="table table-bordered table-striped">
-    <thead class="table-dark">
-        <tr>
-            <th>Назва</th>
-            <th>Опис</th>
-            <th>Початок</th>
-            <th>Кінець</th>
-            <th>Статус</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach($project->tasks as $task)
-        <tr>
-            <td>{{ $task->name }}</td>
-            <td>{{ $task->description }}</td>
-            <td>{{ $task->start_date }}</td>
-            <td>{{ $task->end_date ?? '—' }}</td>
-            <td>{{ $task->status }}</td>
-        </tr>
-        @endforeach
-    </tbody>
-</table>
-@endif
-
-<a href="/projects" class="btn btn-secondary mt-3">← Назад до списку</a>
-
 @endsection
