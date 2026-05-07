@@ -1,18 +1,21 @@
 <?php
-
 namespace App\Http\Controllers\Api;
-
 use App\Http\Controllers\Controller;
 use App\Http\Resources\EmployeeResource;
 use Illuminate\Http\Request;
 use App\Models\Employee;
+
 class EmployeeController extends Controller
 {
-
-    public function index()
+    public function index(Request $request)
     {
-       $employees = Employee::all();
-       return EmployeeResource::collection($employees);
+        $query = Employee::with('position');
+        
+        if ($request->filled('status') && $request->status !== 'All') {
+            $query->where('status', $request->status);
+        }
+        
+        return EmployeeResource::collection($query->get());
     }
 
     public function store(Request $request)
@@ -24,11 +27,9 @@ class EmployeeController extends Controller
     public function show($id)
     {
         $employee = Employee::with('position')->find($id);
-    
         if (!$employee) {
             return response()->json(['message' => 'Employee not found'], 404);
         }
-    
-        return new \App\Http\Resources\EmployeeResource($employee);
+        return new EmployeeResource($employee);
     }
 }
