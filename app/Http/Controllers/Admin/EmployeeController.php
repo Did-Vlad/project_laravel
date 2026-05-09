@@ -23,18 +23,20 @@ class EmployeeController extends Controller
 
     public function store(Request $request)
     {
+        // Валідація даних
         $request->validate([
-            'first_name'       => 'required|string|max:30',
-            'last_name'        => 'required|string|max:30',
-            'midl_name'        => 'nullable|string|max:30',
-            'gender'           => 'required|in:M,F',
-            'phone'            => 'required|regex:/^\+?[0-9]{10,15}$/',
-            'email'            => 'required|email|unique:employees,email',
-            'hire_date'        => 'required|date',
+            'first_name' => 'required|string|max:30',
+            'last_name' => 'required|string|max:30',
+            'midl_name' => 'nullable|string|max:30',
+            'gender' => 'required|in:M,F',
+            'phone' => 'required|regex:/^\+?[0-9]{10,15}$/',
+            'email' => 'required|email|unique:employees,email',
+            'hire_date' => 'required|date',
             'termination_date' => 'nullable|date|after:hire_date',
-            'status'           => 'required|in:Активний,Звільнений',
-            'position_id'      => 'required|exists:positions,id',
-            'department_id'    => 'required|exists:departments,id',
+            'status' => 'required|in:Активний,Звільнений',
+            //Валідація відповідності посади => відділу 
+            'position_id' => 'required|exists:positions,id',
+            'department_id' => 'required|exists:departments,id',
         ]);
         Employee::create($request->all());
         return redirect()->route('admin.employees.index')
