@@ -8,9 +8,7 @@
             <p class="text-muted">Всього: {{ count($employees) }} працівників</p>
         </div>
         @if(auth()->user()->role === 'admin')
-            <a href="{{ route('admin.employees.create') }}" class="btn btn-success px-4">
-                <i class="bi bi-person-plus"></i> + Додати співробітника
-            </a>
+            <a href="{{ route('admin.employees.create') }}" class="btn btn-success px-4">+ Додати співробітника</a>
         @endif
     </div>
 
@@ -52,17 +50,19 @@
                                 <span class="badge bg-secondary">Inactive</span>
                             @endif
                         </td>
-                        <td class="text-center">
-                            <a href="/employees/{{ $employee->id }}" class="btn btn-sm btn-outline-primary">Переглянути</a>
-                            @if(auth()->user()->role === 'admin')
-                                <a href="{{ route('admin.employees.edit', $employee) }}" class="btn btn-sm btn-outline-warning">Редагувати</a>
-                                <form action="{{ route('admin.employees.destroy', $employee) }}" method="POST" class="d-inline"
-                                      onsubmit="return confirm('Видалити співробітника?')">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-sm btn-outline-danger">Видалити</button>
-                                </form>
-                            @endif
+                        <td>
+                            <div class="d-flex gap-1 justify-content-center">
+                                <a href="/employees/{{ $employee->id }}" class="btn btn-sm btn-primary">Переглянути</a>
+                                @if(auth()->user()->role === 'admin')
+                                    <a href="{{ route('admin.employees.edit', $employee) }}" class="btn btn-sm btn-warning">Редагувати</a>
+                                    <form action="{{ route('admin.employees.destroy', $employee) }}" method="POST" class="d-inline"
+                                          onsubmit="return confirm('Видалити співробітника?')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-sm btn-danger">Видалити</button>
+                                    </form>
+                                @endif
+                            </div>
                         </td>
                     </tr>
                     @endforeach
