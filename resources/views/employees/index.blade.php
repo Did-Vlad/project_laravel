@@ -37,8 +37,7 @@
                 <td>{{ $employee->department->name ?? '—' }}</td>
                 <td>{{ $employee->status }}</td>
                 <td>
-                    <a href="{{ route('admin.employees.show', $employee) }}" class="btn btn-sm btn-primary">Переглянути</a>
-
+                <a href="/employees/{{ $employee->id }}" class="btn btn-sm btn-primary">Переглянути</a>
                     @if(auth()->user()->role === 'admin')
                         <a href="{{ route('admin.employees.edit', $employee) }}" class="btn btn-sm btn-warning">Редагувати</a>
 
